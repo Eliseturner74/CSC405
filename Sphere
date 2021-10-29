@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<script> tag 
+		<a-scene>
+		private int diameter, radius;
+		private double volume, surfArea;
+
+		var va = vec4(0.0, 0.0, -1.0, 1);
+		var vb = vec4(0.0, 0.942809, 0.333333, 1);
+		var vc = vec4(-0.816497, -0.471405, 0.333333, 1);
+		var vd = vec4(0.816497, -0.471405, 0.333333, 1);
+		tetrahedron(va, vb, vc, vd, numTimesToSubdevide);
+		
+		tetrahedron(a, b, c, d, n);
+		
+		Function tetrahedron(a, b, c, d, n);
+		{
+			divideTriangle a(a, b, c, n);
+			divideTriangle b(d, c, b, n);
+			divideTriangle c(a, d, b, n);
+			divideTriangle c(a, c, d, n);
+			
+		}
+		Function divideTriangle(a, b, c, count);
+		if (count > 0);
+		var ab = normalize(mix(a, b, .5), true);
+		var ac = normalize(mix(a, c, 0.5), true);
+		var bc = normalize(mix(b, c, 0.5), true);
+		divideTriangle(a, ab, ac, count - 1);
+		divideTriangle(ab, b, bc, count - 1);
+		divideTriangle(bc, c, ac, count - 1);
+		divideTriangle(ab, bc, ac, count - 1);
+	}
+	else {
+		triangle(a, b, c);
+	}
+}
+Function triangle(a, b, c) {
+	pointsArray.push(a);
+	pointsArray.push(a);
+	pointsArray.push(a);
+	index += 3;
+}
